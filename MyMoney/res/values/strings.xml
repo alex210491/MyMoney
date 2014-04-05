@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MyMoney</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    
+    <string name="menuitem1">Menu Item 1</string>
+    <string name="menuitem2">Menu Item 2</string>
+
+</resources>
