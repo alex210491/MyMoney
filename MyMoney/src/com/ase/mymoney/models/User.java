@@ -1,4 +1,4 @@
-package com.ase.mymoney.model;
+package com.ase.mymoney.models;
 
 import android.content.SharedPreferences;
 

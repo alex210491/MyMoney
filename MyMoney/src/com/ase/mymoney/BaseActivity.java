@@ -8,9 +8,9 @@ import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 
-import com.ase.mymoney.model.ExpanceType;
+import com.ase.mymoney.models.ExpanceType;
 import com.ase.mymoney.ui.SlidingMenuFragment;
-import com.ase.mymoney.util.DatabaseHelper;
+import com.ase.mymoney.utils.DatabaseHelper;
 
 public class BaseActivity extends Activity {
 

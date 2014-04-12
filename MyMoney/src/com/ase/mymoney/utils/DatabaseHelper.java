@@ -1,4 +1,4 @@
-package com.ase.mymoney.util;
+package com.ase.mymoney.utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.ase.mymoney.model.ExpanceType;
+import com.ase.mymoney.models.ExpanceType;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
