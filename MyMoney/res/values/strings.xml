@@ -7,5 +7,8 @@
     
     <string name="menuitem1">Menu Item 1</string>
     <string name="menuitem2">Menu Item 2</string>
+    
+	<string name="cheltuieliFixe">Cheltuieli Fixe</string>
+	<string name="title_expance_types">Expance Types</string>
 
 </resources>

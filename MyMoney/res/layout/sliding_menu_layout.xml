@@ -5,7 +5,7 @@
     android:orientation="vertical" >
     
     <TextView 
-        android:id="@+id/menuitem1"
+        android:id="@+id/expanceTypeBtn"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:textSize="@dimen/menu_item_text_size"
@@ -13,7 +13,7 @@
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:textColor="#FFFFFF"
-        android:text="@string/menuitem1"
+        android:text="@string/title_expance_types"
         />
     
     <TextView 

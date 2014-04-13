@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.ase.mymoney.models.Expance;
 import com.ase.mymoney.models.ExpanceType;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -28,9 +29,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ExpanceType.COLUMN_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, " + 
                 ExpanceType.COLUMN_TITLE+" TEXT, "+
                 ExpanceType.COLUMN_REMINDER_DAY+" INTEGER )";
- 
-        // create books table
-        db.execSQL(create_expance_types);
+		
+		String create_expances = "CREATE TABLE "+Expance.TABLE_NAME+" ( "+
+				Expance.COLUMN_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, " +
+				Expance.COLUMN_EXPANCE_TYPE_ID+" INTEGER, "+
+                Expance.COLUMN_TITLE+" TEXT, "+
+                Expance.COLUMN_SUM+" REAL, "+                
+                Expance.COLUMN_UM+" INTEGER )";
+		
+        db.execSQL(create_expance_types); // create expance_types table
+        db.execSQL(create_expances); // create expances table
 	}
 
 	@Override
@@ -73,6 +81,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		
 		return list;
 		
+	}
+	
+	public long addExpance(Expance expance){
+		
+		
+		
+		return -1;
 	}
 
 }
