@@ -1,15 +1,15 @@
 package com.ase.mymoney;
 
-import java.util.List;
-
 import net.simonvt.menudrawer.MenuDrawer;
 import net.simonvt.menudrawer.Position;
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 
-import com.ase.mymoney.models.ExpanceType;
+import com.ase.mymoney.ui.InregistrareUser;
 import com.ase.mymoney.ui.SlidingMenuFragment;
+import com.ase.mymoney.utils.CommonUtils;
 import com.ase.mymoney.utils.DatabaseHelper;
 
 public class BaseActivity extends Activity {
@@ -22,6 +22,13 @@ public class BaseActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		CommonUtils.setApplicationContext(getApplicationContext());
+		
+//		if( true ){
+//			Intent intent = new Intent(this, InregistrareUser.class);
+//			startActivity(intent);
+//		} 
 		
 		if( dbHelper==null ){
 			dbHelper = new DatabaseHelper(this);

@@ -17,7 +17,7 @@
         />
     
     <TextView 
-        android:id="@+id/menuitem2"
+        android:id="@+id/myProfileBtn"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:textSize="@dimen/menu_item_text_size"
@@ -25,6 +25,6 @@
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:textColor="#FFFFFF"
-        android:text="@string/menuitem2"
+        android:text="@string/title_my_profile"
         />
 </LinearLayout>

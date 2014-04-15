@@ -14,7 +14,8 @@ import com.ase.mymoney.R;
 
 public class SlidingMenuFragment extends Fragment {
 	
-	TextView expanceTypesButton;
+	private TextView expanceTypesButton;
+	private TextView myProfileButton;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class SlidingMenuFragment extends Fragment {
 		super.onViewCreated(view, savedInstanceState);
 		
 		expanceTypesButton = (TextView) view.findViewById(R.id.expanceTypeBtn);
+		myProfileButton = (TextView) view.findViewById(R.id.myProfileBtn);
 		
 		
 		expanceTypesButton.setOnClickListener(new OnClickListener() {
@@ -47,6 +49,17 @@ public class SlidingMenuFragment extends Fragment {
 				startActivity(intent);
 			}
 		});
+		
+		myProfileButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), MyProfil.class);
+				startActivity(intent);
+			}
+		});
+		
+		
 		
 		
 		

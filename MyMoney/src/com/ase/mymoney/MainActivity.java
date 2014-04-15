@@ -1,14 +1,22 @@
 package com.ase.mymoney;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
+
+import com.ase.mymoney.ui.InregistrareUser;
 
 public class MainActivity extends BaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		if( true ){
+			Intent intent = new Intent(this, InregistrareUser.class);
+			startActivity(intent);
+		} 
+		
 		setContentView(R.layout.activity_main);
 	}
 

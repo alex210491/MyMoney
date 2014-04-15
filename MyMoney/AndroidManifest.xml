@@ -25,6 +25,14 @@
             android:name="com.ase.mymoney.ui.ExpanceTypesActivity"
             android:label="@string/title_expance_types" >
         </activity>
+        <activity
+            android:name="com.ase.mymoney.ui.MyProfil"
+            android:label="@string/title_expance_types" >
+        </activity>
+        <activity
+            android:name="com.ase.mymoney.ui.InregistrareUser"
+            android:label="@string/title_expance_types" >
+        </activity>
     </application>
 
 </manifest>
