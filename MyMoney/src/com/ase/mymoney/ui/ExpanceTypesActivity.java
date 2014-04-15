@@ -1,12 +1,12 @@
 package com.ase.mymoney.ui;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 
@@ -20,19 +20,19 @@ public class ExpanceTypesActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_tipuri_cheltuieli2);
+		setContentView(R.layout.fragment_tipuri_cheltuieli2);
 
-		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-		}
+//		if (savedInstanceState == null) {
+//			getFragmentManager().beginTransaction()
+//					.add(R.id.container, new PlaceholderFragment()).commit();
+//		}
 		Button click = (Button) findViewById(R.id.btnAdauga);
-        /*click.setOnClickListener(new OnClickListener() {
+        click.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog();
             }
-        });*/
+        });
 	}
 
 	@Override
@@ -53,23 +53,6 @@ public class ExpanceTypesActivity extends BaseActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(
-					R.layout.fragment_tipuri_cheltuieli2, container, false);
-			return rootView;
-		}
 	}
 	
 	public void showDialog() {
