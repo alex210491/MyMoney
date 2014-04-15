@@ -27,11 +27,15 @@
         </activity>
         <activity
             android:name="com.ase.mymoney.ui.MyProfil"
-            android:label="@string/title_expance_types" >
+            android:label="@string/title_my_profile" >
         </activity>
         <activity
             android:name="com.ase.mymoney.ui.InregistrareUser"
-            android:label="@string/title_expance_types" >
+            android:label="@string/title_register" >
+        </activity>
+        <activity
+            android:name="com.ase.mymoney.ui.ExpanceActivity"
+            android:label="@string/title_expance" >
         </activity>
     </application>
 

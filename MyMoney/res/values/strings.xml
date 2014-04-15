@@ -11,5 +11,13 @@
 	<string name="cheltuieliFixe">Cheltuieli Fixe</string>
 	<string name="title_expance_types">Expance Types</string>
 	<string name="title_my_profile">My Profile</string>
+	<string name="title_expance">Expance</string>
+	<string name="title_register">Register</string>
+	
+	<string name="add_expance">Add Expance</string>
+	<string name="add_expance_wizard">Add Expance Wizard</string>
+	
+	<string name="cancel">Cancel</string>
+	<string name="next">Next</string>
 
 </resources>

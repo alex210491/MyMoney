@@ -1,5 +1,7 @@
 package com.ase.mymoney.models;
 
+import java.util.Date;
+
 public class Expance {
 	
 	public static String TABLE_NAME = "expances";
@@ -9,12 +11,14 @@ public class Expance {
 	public static String COLUMN_TITLE = "title";
 	public static String COLUMN_SUM = "sum";
 	public static String COLUMN_UM = "um";
+	public static String COLUMN_CREATED = "created";
 
 	private int id;
 	private int expance_type_id;
 	private String title;
 	private float sum;
 	private int um;
+	private Date created;
 	
 	public int getId() {
 		return id;
@@ -56,6 +60,14 @@ public class Expance {
 		this.um = um;
 	}
 		
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
 	public boolean save(){
 		return true;
 	}

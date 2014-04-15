@@ -16,6 +16,7 @@ public class SlidingMenuFragment extends Fragment {
 	
 	private TextView expanceTypesButton;
 	private TextView myProfileButton;
+	private TextView expanceButton;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -39,13 +40,14 @@ public class SlidingMenuFragment extends Fragment {
 		
 		expanceTypesButton = (TextView) view.findViewById(R.id.expanceTypeBtn);
 		myProfileButton = (TextView) view.findViewById(R.id.myProfileBtn);
-		
+		expanceButton = (TextView) view.findViewById(R.id.expanceBtn);
 		
 		expanceTypesButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(getActivity(), ExpanceTypesActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP); //the activity will not be launched if it is already running at the top of the history stack
 				startActivity(intent);
 			}
 		});
@@ -55,11 +57,20 @@ public class SlidingMenuFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(getActivity(), MyProfil.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 				startActivity(intent);
 			}
 		});
 		
-		
+		expanceButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), ExpanceActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+				startActivity(intent);
+			}
+		});
 		
 		
 		
