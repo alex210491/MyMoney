@@ -9,7 +9,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.ase.mymoney.BaseActivity;
 import com.ase.mymoney.R;
 
 public class SlidingMenuFragment extends Fragment {
