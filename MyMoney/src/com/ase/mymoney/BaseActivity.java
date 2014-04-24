@@ -2,17 +2,15 @@ package com.ase.mymoney;
 
 import net.simonvt.menudrawer.MenuDrawer;
 import net.simonvt.menudrawer.Position;
-import android.app.Activity;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
-import com.ase.mymoney.ui.InregistrareUser;
 import com.ase.mymoney.ui.SlidingMenuFragment;
 import com.ase.mymoney.utils.CommonUtils;
 import com.ase.mymoney.utils.DatabaseHelper;
 
-public class BaseActivity extends Activity {
+public class BaseActivity extends FragmentActivity {
 
 	MenuDrawer mMenuDrawer;
 	SlidingMenuFragment mMenuFragment;

@@ -80,4 +80,9 @@ public class ExpanceType {
 	public long save(){
 		return BaseActivity.dbHelper.addExpanceType(this);
 	}
+	
+	@Override
+	public String toString() {
+		return this.title;
+	}
 }

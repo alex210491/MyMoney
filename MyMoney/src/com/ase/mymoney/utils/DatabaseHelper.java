@@ -34,7 +34,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				Expance.COLUMN_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, " +
 				Expance.COLUMN_EXPANCE_TYPE_ID+" INTEGER, "+
                 Expance.COLUMN_TITLE+" TEXT, "+
-                Expance.COLUMN_SUM+" REAL, "+                
+                Expance.COLUMN_SUM+" REAL, "+
+                Expance.COLUMN_CREATED+" INTEGER, "+
                 Expance.COLUMN_UM+" INTEGER )";
 		
         db.execSQL(create_expance_types); // create expance_types table
@@ -85,9 +86,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	
 	public long addExpance(Expance expance){
 		
+		SQLiteDatabase db = this.getWritableDatabase();
 		
+		ContentValues contentValues = new ContentValues();
+		contentValues.put(Expance.COLUMN_EXPANCE_TYPE_ID, expance.getExpanceTypeId());
+		contentValues.put(Expance.COLUMN_SUM, expance.getSum());
+		contentValues.put(Expance.COLUMN_TITLE, expance.getTitle());
+		contentValues.put(Expance.COLUMN_UM, expance.getUm());
+		contentValues.put(Expance.COLUMN_CREATED, expance.getCreated());
 		
-		return -1;
+		long id = db.insert(Expance.TABLE_NAME, null, contentValues);
+		db.close();
+		return id;
+		
+	}
+	
+	public List<Expance> getAllExpance(){
+		SQLiteDatabase db = this.getWritableDatabase();
+		String query = "SELECT * FROM " +Expance.TABLE_NAME;
+		Cursor cursor = db.rawQuery(query, null);
+		Expance expance;
+		List<Expance> list = new ArrayList<Expance>();
+		
+		if(cursor.moveToFirst()){
+			do{
+				expance = new Expance();
+				expance.setId(cursor.getInt(0));
+				expance.setExpanceTypeId(cursor.getInt(1));
+				expance.setTitle(cursor.getString(2));
+				expance.setSum(cursor.getFloat(3));
+				expance.setCreated(cursor.getLong(4));
+				expance.setUm(cursor.getInt(5));
+				list.add(expance);
+			}while(cursor.moveToNext());
+		}
+		
+		return list;
+		
 	}
 
 }

@@ -19,5 +19,10 @@
 	
 	<string name="cancel">Cancel</string>
 	<string name="next">Next</string>
+	<string name="finish">Finish</string>
+	
+	<string name="expance_name">title</string>
+	<string name="expance_price">price</string>
+	<string name="expance_type">Expance Type</string>
 
 </resources>

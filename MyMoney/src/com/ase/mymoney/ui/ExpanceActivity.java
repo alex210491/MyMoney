@@ -1,31 +1,43 @@
 package com.ase.mymoney.ui;
 
-import android.app.FragmentManager;
+import java.util.List;
+
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
+import android.widget.ListView;
 
 import com.ase.mymoney.BaseActivity;
 import com.ase.mymoney.R;
+import com.ase.mymoney.adapters.ExpanceAdapter;
+import com.ase.mymoney.models.Expance;
 
 public class ExpanceActivity extends BaseActivity {
 	
-	MenuItem mAddExpanceMenuItem;
-	FragmentManager mFragmentManager;
+	private MenuItem mAddExpanceMenuItem;
+	private FragmentManager mFragmentManager;
+	private ListView mListView;
+	private ExpanceAdapter mExpanceAdapter;
+	private List<Expance>mExpanceList;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		mFragmentManager = getFragmentManager();
+		mExpanceList = BaseActivity.dbHelper.getAllExpance();
+		mExpanceAdapter = new ExpanceAdapter(this, mExpanceList);
+		
+		mFragmentManager = getSupportFragmentManager();
 		setContentView(R.layout.activity_expance);
 	
 		setupView();
 	}
 	
 	private void setupView(){
-		
+		mListView = (ListView) findViewById(R.id.listView);
+		mListView.setAdapter(mExpanceAdapter);
 	}
 	
 	@Override

@@ -7,18 +7,18 @@ public class Expance {
 	public static String TABLE_NAME = "expances";
 	
 	public static String COLUMN_ID = "id";
-	public static String COLUMN_EXPANCE_TYPE_ID = "expance_type_id";
+	public static String COLUMN_EXPANCE_TYPE_ID = "expanceTypeId";
 	public static String COLUMN_TITLE = "title";
 	public static String COLUMN_SUM = "sum";
 	public static String COLUMN_UM = "um";
 	public static String COLUMN_CREATED = "created";
 
 	private int id;
-	private int expance_type_id;
+	private int expanceTypeId;
 	private String title;
 	private float sum;
 	private int um;
-	private Date created;
+	private long created;
 	
 	public int getId() {
 		return id;
@@ -28,12 +28,12 @@ public class Expance {
 		this.id = id;
 	}
 
-	public int getExpance_type_id() {
-		return expance_type_id;
+	public int getExpanceTypeId() {
+		return expanceTypeId;
 	}
 
-	public void setExpance_type_id(int expance_type_id) {
-		this.expance_type_id = expance_type_id;
+	public void setExpanceTypeId(int expance_type_id) {
+		this.expanceTypeId = expance_type_id;
 	}
 
 	public String getTitle() {
@@ -60,11 +60,11 @@ public class Expance {
 		this.um = um;
 	}
 		
-	public Date getCreated() {
+	public long getCreated() {
 		return created;
 	}
 
-	public void setCreated(Date created) {
+	public void setCreated(long created) {
 		this.created = created;
 	}
 

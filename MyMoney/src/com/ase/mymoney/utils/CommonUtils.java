@@ -13,4 +13,10 @@ public class CommonUtils {
 		mContext = context;
 	}
 	
+	public static int getUM(String um){
+		if(um.equalsIgnoreCase("ron")) return UM_RON;
+		if(um.equalsIgnoreCase("eur")) return UM_EUR;
+		return -1;
+	}
+	
 }
