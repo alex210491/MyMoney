@@ -2,9 +2,9 @@ package com.ase.mymoney;
 
 import net.simonvt.menudrawer.MenuDrawer;
 import net.simonvt.menudrawer.Position;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 
 import com.ase.mymoney.ui.SlidingMenuFragment;
 import com.ase.mymoney.utils.CommonUtils;
@@ -23,11 +23,6 @@ public class BaseActivity extends FragmentActivity {
 		
 		CommonUtils.setApplicationContext(getApplicationContext());
 		
-//		if( true ){
-//			Intent intent = new Intent(this, InregistrareUser.class);
-//			startActivity(intent);
-//		} 
-		
 		if( dbHelper==null ){
 			dbHelper = new DatabaseHelper(this);
 		}
@@ -43,7 +38,7 @@ public class BaseActivity extends FragmentActivity {
 	
 	protected void attachSlidingMenu() {
 		mMenuFragment = new SlidingMenuFragment();
-		FragmentTransaction ft = getFragmentManager().beginTransaction().replace(R.id.menuFrame, mMenuFragment);
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction().replace(R.id.menuFrame, mMenuFragment);
 		ft.commit();
 	}
 	

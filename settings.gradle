@@ -1,0 +1,3 @@
+include ':menulibrary'
+include ':google-play-services_lib'
+include ':MyMoney'

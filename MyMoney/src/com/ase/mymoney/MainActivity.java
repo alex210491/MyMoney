@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 
-import com.ase.mymoney.ui.InregistrareUser;
+import com.ase.mymoney.ui.MapActivity;
 
 public class MainActivity extends BaseActivity {
 
@@ -13,9 +13,11 @@ public class MainActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		
 		if( true ){
-			Intent intent = new Intent(this, InregistrareUser.class);
+//			Intent intent = new Intent(this, InregistrareUser.class);
+//			startActivity(intent);
+			Intent intent = new Intent(this, MapActivity.class);
 			startActivity(intent);
-		} 
+		}
 		
 		setContentView(R.layout.activity_main);
 	}
