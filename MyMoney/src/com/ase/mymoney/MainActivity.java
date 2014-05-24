@@ -2,31 +2,29 @@ package com.ase.mymoney;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 
-import com.ase.mymoney.ui.MapActivity;
+import com.ase.mymoney.models.User;
+import com.ase.mymoney.ui.InregistrareUser;
 
 public class MainActivity extends BaseActivity {
 
+	User mUser;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		if( true ){
-//			Intent intent = new Intent(this, InregistrareUser.class);
-//			startActivity(intent);
-			Intent intent = new Intent(this, MapActivity.class);
+		User mUser = User.getCurrentUser();
+		
+		if( User.getCurrentUser()==null ){ //daca nu sunt inregistrat => forteaza ecranul de inregistrare
+			Intent intent = new Intent(this, InregistrareUser.class);
 			startActivity(intent);
+			finish();
+			return;
 		}
 		
 		setContentView(R.layout.activity_main);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
 
 }

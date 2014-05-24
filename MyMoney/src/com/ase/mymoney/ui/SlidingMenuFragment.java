@@ -46,7 +46,7 @@ public class SlidingMenuFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(getActivity(), ExpanceTypesActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP); //the activity will not be launched if it is already running at the top of the history stack
+				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP); //the activity will not be launched if it is already running at the top of the history stack
 				startActivity(intent);
 			}
 		});
@@ -55,8 +55,8 @@ public class SlidingMenuFragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), MyProfil.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+				Intent intent = new Intent(getActivity(), InregistrareUser.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 			}
 		});
@@ -66,7 +66,7 @@ public class SlidingMenuFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(getActivity(), ExpanceActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 			}
 		});

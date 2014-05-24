@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.ase.mymoney.R;
 import com.ase.mymoney.models.Expance;
+import com.ase.mymoney.utils.CommonUtils;
 
 public class ExpanceAdapter extends BaseAdapter {
 
@@ -45,7 +46,9 @@ public class ExpanceAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		
 		Expance currentExpance = getItem(position);
-		
+		String um = "EUR";
+		if(currentExpance.getUm()==CommonUtils.UM_RON) um = "RON";
+				
 		View view = convertView;
 		ViewHolder holder = new ViewHolder();
 		if(view==null){
@@ -59,9 +62,9 @@ public class ExpanceAdapter extends BaseAdapter {
 			holder = (ViewHolder) view.getTag();
 		}
 		
-		holder.expanceCount.setText(String.valueOf(position));
+		holder.expanceCount.setText(String.valueOf(position+1));
 		holder.expanceTitle.setText(currentExpance.getTitle());
-		holder.expancePrice.setText(String.valueOf(currentExpance.getSum()));
+		holder.expancePrice.setText(String.valueOf(currentExpance.getSum())+um);
 		
 		return view;
 	}

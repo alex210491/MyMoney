@@ -2,10 +2,12 @@ package com.ase.mymoney;
 
 import net.simonvt.menudrawer.MenuDrawer;
 import net.simonvt.menudrawer.Position;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 
+import com.ase.mymoney.ui.InregistrareUser;
 import com.ase.mymoney.ui.SlidingMenuFragment;
 import com.ase.mymoney.utils.CommonUtils;
 import com.ase.mymoney.utils.DatabaseHelper;
@@ -33,6 +35,8 @@ public class BaseActivity extends FragmentActivity {
 		mMenuDrawer.setMenuSize((int) this.getResources().getDimension(R.dimen.sliding_menu_width));
 		
 		attachSlidingMenu();
+		
+		
 	}
 	
 	
@@ -42,4 +46,14 @@ public class BaseActivity extends FragmentActivity {
 		ft.commit();
 	}
 	
+	protected void disableMenuDrawer() {
+		mMenuDrawer.setTouchMode(MenuDrawer.TOUCH_MODE_NONE);
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		
+		mMenuDrawer.closeMenu(true);
+	}
 }

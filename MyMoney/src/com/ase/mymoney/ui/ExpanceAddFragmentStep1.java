@@ -60,8 +60,11 @@ public class ExpanceAddFragmentStep1 extends Fragment implements ExpanceUpdater{
 	public Expance updateExpance(Expance expance) {
 		String um = (String) mExpanceUnit.getSelectedItem();
 		int monetaryUnit = CommonUtils.getUM(um);
-		
-		expance.setSum(Float.parseFloat(mExpanceSum.getText().toString()));
+		try{
+			expance.setSum(Float.parseFloat(mExpanceSum.getText().toString()));
+		}catch(NumberFormatException e){
+			expance.setSum(0);
+		}
 		expance.setUm(monetaryUnit);
 		return expance;
 	}

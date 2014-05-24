@@ -4,169 +4,126 @@ import java.util.Date;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.widget.RadioButton;
 
 import com.ase.mymoney.utils.CommonUtils;
 
 public class User {
-	
 
-	public static String firstName;
-	public static String lastName;
-	public static String sex;
-	public static String unit;
-	public static Date date;
-	public static String password;
-	public static String email;
-	public static float buget;
-	
-	
-	
-	
+	public String firstName;
+	public String lastName;
+	public String sex;
+	public int unit;
+	public Date date;
+	public String email;
+	public float buget;
+
 	public User() {
 		super();
 	}
 
-
-	public User(String firtsName, String lastName, String sex, String unit, String password, String email, Date date, float buget)
-	{
+	public User(String firtsName, String lastName, String sex, int unit, String email, Date date, float buget) {
 		super();
-		this.firstName=firtsName;
-		this.lastName=lastName;
-		this.sex=sex;
-		this.unit=unit;
-		this.password=password;
-		this.email=email;
-		this.date=date;
-		this.buget=buget;
+		this.firstName = firtsName;
+		this.lastName = lastName;
+		this.sex = sex;
+		this.unit = unit;
+		this.email = email;
+		this.date = date;
+		this.buget = buget;
 	}
 
-	public static String getFirstName() {
+	public String getFirstName() {
 		return firstName;
 	}
 
-
-
-
-	public static void setFirstName(String firstName) {
-		User.firstName = firstName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-
-
-
-	public static String getLastName() {
+	public String getLastName() {
 		return lastName;
 	}
 
-
-
-
-	public static void setLastName(String lastName) {
-		User.lastName = lastName;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-
-
-
-	public static String getSex() {
+	public String getSex() {
 		return sex;
 	}
 
-
-
-
-	public static void setSex(String sex) {
-		User.sex = sex;
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 
-
-
-
-	public static String getUnit() {
+	public int getUnit() {
 		return unit;
 	}
 
-
-
-
-	public static void setUnit(String unit) {
-		User.unit = unit;
+	public void setUnit(int unit) {
+		this.unit = unit;
 	}
 
-
-
-
-	public static Date getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-
-
-
-	public static void setDate(Date date) {
-		User.date = date;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
-
-
-
-	public static String getPassword() {
-		return password;
-	}
-
-
-
-
-	public static void setPassword(String password) {
-		User.password = password;
-	}
-
-
-
-
-	public static String getEmail() {
+	public String getEmail() {
 		return email;
 	}
 
-
-
-
-	public static void setEmail(String email) {
-		User.email = email;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-
-
-
-	public static float getBuget() {
+	public float getBuget() {
 		return buget;
 	}
 
-
-
-
-	public static void setBuget(float buget) {
-		User.buget = buget;
+	public void setBuget(float buget) {
+		this.buget = buget;
 	}
 
-	
-	
-	public boolean save(){
-		SharedPreferences sp= CommonUtils.mContext.getSharedPreferences("MyMoneyProfil", Context.MODE_PRIVATE);
-		SharedPreferences.Editor editor= sp.edit();
-		
-		editor.putString("fname", firstName );
-		editor.putString("lname", lastName);
-		editor.putString("password", password);
-		editor.putString("email", email);
-		editor.putFloat("buget", buget);
-		editor.putString("ssexs", sex);
-		editor.putString("units", unit);
-		
+	public boolean save() {
+		SharedPreferences sp = CommonUtils.mContext.getSharedPreferences(
+				"MyMoneyProfil", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = sp.edit();
+
+		editor.putString("USER_FIRST_NAME", firstName);
+		editor.putString("USER_LAST_NAME", lastName);
+		editor.putString("USER_EMAIL", email);
+		editor.putFloat("USER_BUGET", buget);
+		editor.putString("USER_SEX", sex);
+		editor.putInt("USER_UNIT", unit);
+		editor.putLong("USER_BIRTHDAY", date.getTime());
+
 		editor.commit();
-		
+
 		return true;
 	}
 	
+	public static User getCurrentUser(){
+		User currentUser = null;
+		SharedPreferences sp = CommonUtils.mContext.getSharedPreferences("MyMoneyProfil", Context.MODE_PRIVATE);
+		
+		String firstname = sp.getString("USER_FIRST_NAME", null);
+		String lastname = sp.getString("USER_LAST_NAME", null);
+		String email = sp.getString("USER_EMAIL", null);
+		String sex = sp.getString("USER_SEX", null);
+		float buget = sp.getFloat("USER_BUGET", 0);
+		int unit = sp.getInt("USER_UNIT", CommonUtils.UM_RON);
+		Date d = new Date();
+		long time = sp.getLong("USER_BIRTHDAY", 0);
+		d.setTime(time);
+		
+		if(firstname!=null){ //user exists
+			currentUser = new User(firstname, lastname, sex, unit, email, d, buget);
+		}
+		return currentUser;
+	}
+
 }

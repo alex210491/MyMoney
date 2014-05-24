@@ -8,19 +8,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.ase.mymoney.BaseActivity;
 import com.ase.mymoney.R;
 import com.ase.mymoney.adapters.ExpanceAdapter;
 import com.ase.mymoney.models.Expance;
+import com.ase.mymoney.ui.ExpanceAddWizardDialogFragment.OnExpanceAddListener;
 
-public class ExpanceActivity extends BaseActivity {
+public class ExpanceActivity extends BaseActivity implements OnExpanceAddListener {
 	
 	private MenuItem mAddExpanceMenuItem;
 	private FragmentManager mFragmentManager;
 	private ListView mListView;
 	private ExpanceAdapter mExpanceAdapter;
 	private List<Expance>mExpanceList;
+	private TextView mInfoBar;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +40,18 @@ public class ExpanceActivity extends BaseActivity {
 	
 	private void setupView(){
 		mListView = (ListView) findViewById(R.id.listView);
+		mInfoBar = (TextView) findViewById(R.id.infoBar);
 		mListView.setAdapter(mExpanceAdapter);
+		
+		if(mExpanceList.isEmpty()){
+			mInfoBar.setText("No added expance");
+		}else{
+			float total = 0;
+			for(Expance e: mExpanceList){
+				total+=e.getSum();
+			}
+			mInfoBar.setText("TOTAL: "+total);
+		}
 	}
 	
 	@Override
@@ -57,6 +71,17 @@ public class ExpanceActivity extends BaseActivity {
 		});
 		
 		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public void onExpanceAdded(Expance expance) {
+		mExpanceList.add(expance);
+		mExpanceAdapter.notifyDataSetChanged();
+		float total = 0;
+		for(Expance e: mExpanceList){
+			total+=e.getSum();
+		}
+		mInfoBar.setText("TOTAL: "+total);
 	}
 	
 

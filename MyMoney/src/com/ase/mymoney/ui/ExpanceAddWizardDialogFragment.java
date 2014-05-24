@@ -1,5 +1,6 @@
 package com.ase.mymoney.ui;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
@@ -8,12 +9,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ase.mymoney.BaseActivity;
 import com.ase.mymoney.R;
 import com.ase.mymoney.models.Expance;
 
-public class ExpanceAddWizardDialogFragment extends DialogFragment {
+public class ExpanceAddWizardDialogFragment extends DialogFragment{
 	
 	public static final String TAG = "EXPANCE_ADD_WIZARD";
 	
@@ -22,10 +24,21 @@ public class ExpanceAddWizardDialogFragment extends DialogFragment {
 	private Expance mExpance;
 	private FragmentManager mFragmentManager;
 	private ExpanceUpdater mExpanceUpdater;
+	private OnExpanceAddListener onExpanceAddListener;
 	
+	
+	public interface OnExpanceAddListener{
+		public void onExpanceAdded(Expance expance);
+	}
 	
 	public interface ExpanceUpdater{
 		public Expance updateExpance(Expance expance);
+	}
+	
+	@Override
+	public void onAttach(Activity activity) {
+		onExpanceAddListener = (OnExpanceAddListener) activity;
+		super.onAttach(activity);
 	}
 	
 	@Override
@@ -84,6 +97,15 @@ public class ExpanceAddWizardDialogFragment extends DialogFragment {
 		case 0:
 			mExpance = mExpanceUpdater.updateExpance(mExpance);
 			
+			if(mExpance.getTitle()==null || mExpance.getTitle().isEmpty()){
+				Toast.makeText(getActivity(), "Invalid title", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			if(mExpance.getExpanceTypeId()==-1){
+				Toast.makeText(getActivity(), "Select an expance type", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			
 			ExpanceAddFragmentStep1 fragment = new ExpanceAddFragmentStep1();
 			mExpanceUpdater = fragment;
 			mFragmentManager.beginTransaction().replace(R.id.frameContainer, fragment).commit();
@@ -93,7 +115,12 @@ public class ExpanceAddWizardDialogFragment extends DialogFragment {
 
 		case 1:
 			mExpance = mExpanceUpdater.updateExpance(mExpance);
+			if(mExpance.getSum()==0){
+				Toast.makeText(getActivity(), "Invalid price", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			long id = BaseActivity.dbHelper.addExpance(mExpance);
+			onExpanceAddListener.onExpanceAdded(mExpance);
 			dismiss();
 			break;
 		default:
