@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.ase.mymoney.BaseActivity;
 import com.ase.mymoney.R;
 import com.ase.mymoney.models.Expance;
 import com.ase.mymoney.models.ExpanceType;
@@ -43,7 +44,8 @@ public class ExpanceAddFragmentStep0 extends Fragment implements ExpanceUpdater{
 		
 		List<ExpanceType> list = new ArrayList<ExpanceType>();
 		list.add(new ExpanceType(-1, "Expance Type", 0));
-		list.add(new ExpanceType(1,"alimente", 123584));
+		List<ExpanceType> dbList = BaseActivity.dbHelper.getAllExpanceTypes();
+		list.addAll(dbList);
 		
 		ArrayAdapter<ExpanceType> adapter = new ArrayAdapter<ExpanceType>(getActivity(), android.R.layout.simple_list_item_1, list);
 		mExpanceTypeSpinner.setAdapter(adapter);

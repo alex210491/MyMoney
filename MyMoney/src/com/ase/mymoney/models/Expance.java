@@ -1,9 +1,8 @@
 package com.ase.mymoney.models;
 
-import java.util.Date;
 
 public class Expance {
-	
+
 	public static String TABLE_NAME = "expances";
 	
 	public static String COLUMN_ID = "id";
@@ -11,6 +10,8 @@ public class Expance {
 	public static String COLUMN_TITLE = "title";
 	public static String COLUMN_SUM = "sum";
 	public static String COLUMN_UM = "um";
+	public static final String COLUMN_LATITUDE = "latitude";
+	public static final String COLUMN_LONGITUDE = "longitude";
 	public static String COLUMN_CREATED = "created";
 
 	private int id;
@@ -19,7 +20,25 @@ public class Expance {
 	private float sum;
 	private int um;
 	private long created;
+	private float latitude;
+	private float longitude;
 	
+	public float getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(float d) {
+		this.latitude = d;
+	}
+
+	public float getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(float longitude) {
+		this.longitude = longitude;
+	}
+
 	public int getId() {
 		return id;
 	}

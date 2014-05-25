@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import com.ase.mymoney.BaseActivity;
 import com.ase.mymoney.R;
+import com.ase.mymoney.models.Expance;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -20,7 +21,7 @@ public class MapActivity extends BaseActivity{
 	
 	private GoogleMap mMap;
 	private LocationManager mLocationManager;
-	private List<?> mMarkers;
+	private List<Expance> mExpanceList;
 	private Location mMyLocation;
 	
 	@Override
@@ -34,6 +35,11 @@ public class MapActivity extends BaseActivity{
 		mMyLocation = getMyLocation();
 		
 		initMap();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
 		setupMarkers();
 	}
 	
@@ -43,16 +49,19 @@ public class MapActivity extends BaseActivity{
 		mMap.setMyLocationEnabled(true);
 		
 		if (mMyLocation != null) {
-			mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mMyLocation.getLatitude(), mMyLocation.getLongitude()), 15));
+			mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mMyLocation.getLatitude(), mMyLocation.getLongitude()), 10));
 		}
 	}
 	
 	private void setupMarkers(){
-		LatLng location = new LatLng(mMyLocation.getLatitude(), mMyLocation.getLongitude());
-		MarkerOptions markerOption = new MarkerOptions();
-		markerOption.position(location);
-		markerOption.icon(BitmapDescriptorFactory.defaultMarker());
-		mMap.addMarker(markerOption);
+		mExpanceList = BaseActivity.dbHelper.getAllExpance();
+		for(Expance e : mExpanceList){
+			LatLng location = new LatLng(e.getLatitude(), e.getLongitude());
+			MarkerOptions markerOption = new MarkerOptions();
+			markerOption.position(location);
+			markerOption.icon(BitmapDescriptorFactory.defaultMarker());
+			mMap.addMarker(markerOption);
+		}
 	}
 	
 	private Location getMyLocation(){

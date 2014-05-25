@@ -36,10 +36,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Expance.COLUMN_TITLE+" TEXT, "+
                 Expance.COLUMN_SUM+" REAL, "+
                 Expance.COLUMN_CREATED+" INTEGER, "+
+                Expance.COLUMN_LATITUDE+" NUMERIC, "+
+                Expance.COLUMN_LONGITUDE+" NUMERIC, "+
                 Expance.COLUMN_UM+" INTEGER )";
 		
         db.execSQL(create_expance_types); // create expance_types table
         db.execSQL(create_expances); // create expances table
+        
+        insertDefaultExpanceTypes(db);
 	}
 
 	@Override
@@ -93,6 +97,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		contentValues.put(Expance.COLUMN_SUM, expance.getSum());
 		contentValues.put(Expance.COLUMN_TITLE, expance.getTitle());
 		contentValues.put(Expance.COLUMN_UM, expance.getUm());
+		contentValues.put(Expance.COLUMN_LATITUDE, expance.getLatitude());
+		contentValues.put(Expance.COLUMN_LONGITUDE, expance.getLongitude());
 		contentValues.put(Expance.COLUMN_CREATED, expance.getCreated());
 		
 		long id = db.insert(Expance.TABLE_NAME, null, contentValues);
@@ -116,13 +122,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				expance.setTitle(cursor.getString(2));
 				expance.setSum(cursor.getFloat(3));
 				expance.setCreated(cursor.getLong(4));
-				expance.setUm(cursor.getInt(5));
+				expance.setLatitude(cursor.getFloat(5));
+				expance.setLongitude(cursor.getFloat(6));
+				expance.setUm(cursor.getInt(7));
 				list.add(expance);
 			}while(cursor.moveToNext());
 		}
 		
 		return list;
 		
+	}
+	
+	public void removeExpance(Expance e){
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(Expance.TABLE_NAME, Expance.COLUMN_ID+"= ? ", new String[]{String.valueOf(e.getId())});
+		db.close();
+	}
+	
+	private void insertDefaultExpanceTypes(SQLiteDatabase db){
+		String query = "INSERT INTO " +ExpanceType.TABLE_NAME+ " VALUES "+
+				"(1, 'Food', 0), "+
+				"(2, 'Fitness&Health', 0), "+
+				"(3, 'Travel', 0), "+
+				"(4, 'Fuel', 0), "+
+				"(5, 'Bank', 0), "+
+				"(6, 'Others', 0)";
+		db.execSQL(query);
 	}
 
 }

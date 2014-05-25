@@ -6,12 +6,20 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:gravity="center"
     tools:context=".MainActivity" >
+    
+    <ImageView
+        android:id="@+id/img"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@drawable/money_bag" />
+            
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/currency_text"
+        android:layout_below="@id/img"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

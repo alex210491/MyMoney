@@ -4,9 +4,12 @@ import java.util.List;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.util.MonthDisplayHelper;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.View.OnClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,12 +28,28 @@ public class ExpanceActivity extends BaseActivity implements OnExpanceAddListene
 	private List<Expance>mExpanceList;
 	private TextView mInfoBar;
 	
+	private OnClickListener mDeleteExpanceClickListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			Expance e = (Expance) v.getTag();
+			BaseActivity.dbHelper.removeExpance(e);
+			mExpanceList.remove(e);
+			mExpanceAdapter.notifyDataSetChanged();
+			float total = 0;
+			for(Expance ex: mExpanceList){
+				total+=ex.getSum();
+			}
+			mInfoBar.setText("TOTAL: "+total);
+		}
+	};
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		mExpanceList = BaseActivity.dbHelper.getAllExpance();
-		mExpanceAdapter = new ExpanceAdapter(this, mExpanceList);
+		mExpanceAdapter = new ExpanceAdapter(this, mExpanceList, mDeleteExpanceClickListener);
 		
 		mFragmentManager = getSupportFragmentManager();
 		setContentView(R.layout.activity_expance);

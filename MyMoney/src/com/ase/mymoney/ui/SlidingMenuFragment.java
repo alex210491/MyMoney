@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ase.mymoney.MainActivity;
 import com.ase.mymoney.R;
 
 public class SlidingMenuFragment extends Fragment {
@@ -16,6 +17,8 @@ public class SlidingMenuFragment extends Fragment {
 	private TextView expanceTypesButton;
 	private TextView myProfileButton;
 	private TextView expanceButton;
+	private TextView homeButton;
+	private TextView mapButton;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,8 @@ public class SlidingMenuFragment extends Fragment {
 		expanceTypesButton = (TextView) view.findViewById(R.id.expanceTypeBtn);
 		myProfileButton = (TextView) view.findViewById(R.id.myProfileBtn);
 		expanceButton = (TextView) view.findViewById(R.id.expanceBtn);
+		homeButton = (TextView) view.findViewById(R.id.home);
+		mapButton = (TextView) view.findViewById(R.id.map);
 		
 		expanceTypesButton.setOnClickListener(new OnClickListener() {
 			
@@ -71,7 +76,25 @@ public class SlidingMenuFragment extends Fragment {
 			}
 		});
 		
+		homeButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), MainActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
+			}
+		});
 		
+		mapButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), MapActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
+			}
+		});
 		
 	}
 	
