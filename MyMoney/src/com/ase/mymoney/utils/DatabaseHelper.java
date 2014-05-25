@@ -139,6 +139,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.close();
 	}
 	
+	public void removeExpanceType(ExpanceType e) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(ExpanceType.TABLE_NAME, ExpanceType.COLUMN_ID+"= ? ", new String[]{String.valueOf(e.getId())});
+		db.close();
+	}
+	
 	private void insertDefaultExpanceTypes(SQLiteDatabase db){
 		String query = "INSERT INTO " +ExpanceType.TABLE_NAME+ " VALUES "+
 				"(1, 'Food', 0), "+

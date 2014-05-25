@@ -1,64 +1,84 @@
 package com.ase.mymoney.ui;
 
-import android.app.Fragment;
+import java.util.List;
+
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v4.app.FragmentManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ListView;
 
 import com.ase.mymoney.BaseActivity;
 import com.ase.mymoney.R;
+import com.ase.mymoney.adapters.ExpanceTypeAdapter;
+import com.ase.mymoney.models.ExpanceType;
+import com.ase.mymoney.ui.ExpanceTypeAddFragmentDialog.OnExpanceTypeAddListener;
 
-public class ExpanceTypesActivity extends BaseActivity {
-
-	Button button1;
+public class ExpanceTypesActivity extends BaseActivity implements OnExpanceTypeAddListener {
+	
+	private MenuItem mAddExpanceMenuItem;
+	private FragmentManager mFragmentManager;
+	private ListView mListView;
+	private ExpanceTypeAdapter mExpanceTypeAdapter;
+	private List<ExpanceType>mExpanceTypeList;
+	
+	private OnClickListener mDeleteExpanceClickListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			ExpanceType e = (ExpanceType) v.getTag();
+			BaseActivity.dbHelper.removeExpanceType(e);
+			mExpanceTypeList.remove(e);
+			mExpanceTypeAdapter.notifyDataSetChanged();
+		}
+	};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.fragment_tipuri_cheltuieli2);
-
-//		if (savedInstanceState == null) {
-//			getFragmentManager().beginTransaction()
-//					.add(R.id.container, new PlaceholderFragment()).commit();
-//		}
-		Button click = (Button) findViewById(R.id.btnAdauga);
-        click.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialog();
-            }
-        });
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.tipuri_cheltuieli2, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+		
+		mExpanceTypeList = BaseActivity.dbHelper.getAllExpanceTypes();
+		mExpanceTypeAdapter = new ExpanceTypeAdapter(this, mExpanceTypeList, mDeleteExpanceClickListener);
+		
+		mFragmentManager = getSupportFragmentManager();
+		setContentView(R.layout.activity_expance);
+	
+		setupView();
 	}
 	
-	public void showDialog() {
-		  android.app.FragmentManager fm = getFragmentManager();
-		  ExpanceTypesAddTypeFragment alert = new ExpanceTypesAddTypeFragment();
-		  alert.show(fm, "Alert_Dialog");
-		 }
+	private void setupView(){
+		mListView = (ListView) findViewById(R.id.listView);
+		mListView.setAdapter(mExpanceTypeAdapter);
+		
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		getMenuInflater().inflate(R.menu.expance_menu, menu);
+		
+		mAddExpanceMenuItem = menu.findItem(R.id.action_add);
+		mAddExpanceMenuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				ExpanceTypeAddFragmentDialog wizard = new ExpanceTypeAddFragmentDialog();
+				wizard.show(mFragmentManager, ExpanceAddWizardDialogFragment.TAG);
+				return true; //consumed action
+			}
+		});
+		
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public void onExpanceTypeAdded(ExpanceType expanceType) {
+		mExpanceTypeList.add(expanceType);
+		mExpanceTypeAdapter.notifyDataSetChanged();
+	}
+	
 
 }

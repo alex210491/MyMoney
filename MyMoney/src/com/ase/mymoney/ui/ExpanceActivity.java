@@ -4,11 +4,10 @@ import java.util.List;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.util.MonthDisplayHelper;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
